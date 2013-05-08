@@ -119,6 +119,7 @@ public class LoggerMap extends MapActivity
    private static final int MENU_ABOUT = 5;
    private static final int MENU_LAYERS = 6;
    private static final int MENU_NOTE = 7;
+   private static final int MENU_SMS = 8;
    private static final int MENU_SHARE = 13;
    private static final int MENU_CONTRIB = 14;
    private static final int DIALOG_NOTRACK = 24;
@@ -785,7 +786,7 @@ public class LoggerMap extends MapActivity
       menu.add(ContextMenu.NONE, MENU_SETTINGS, ContextMenu.NONE, R.string.menu_settings).setIcon(R.drawable.ic_menu_preferences).setAlphabeticShortcut('C');
       menu.add(ContextMenu.NONE, MENU_ABOUT, ContextMenu.NONE, R.string.menu_about).setIcon(R.drawable.ic_menu_info_details).setAlphabeticShortcut('A');
       menu.add(ContextMenu.NONE, MENU_CONTRIB, ContextMenu.NONE, R.string.menu_contrib).setIcon(R.drawable.ic_menu_allfriends);
-
+      menu.add(ContextMenu.NONE, MENU_SMS,ContextMenu.NONE,R.string.menu_sms);
       return result;
    }
 
@@ -881,6 +882,15 @@ public class LoggerMap extends MapActivity
             break;
          case MENU_CONTRIB:
             showDialog(DIALOG_CONTRIB);
+            break;
+         case MENU_SMS:
+            GeoPoint myGeoPoint = getLastKnowGeopointLocation();
+            double lat = (myGeoPoint.getLatitudeE6())/1000000.0;
+            double lon = (myGeoPoint.getLongitudeE6())/1000000.0;
+            String message = "My current location is:\nLat: "+lat+"\nLon: "+lon;
+            Intent myIntent = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" ) ); 
+            myIntent.putExtra( "sms_body", message );
+            startActivity( myIntent );
          default:
             handled = super.onOptionsItemSelected(item);
             break;

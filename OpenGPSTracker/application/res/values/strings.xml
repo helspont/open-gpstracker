@@ -149,6 +149,7 @@
     <string name="graphtype_distancealtitude">Altitude over distance</string>
     <string name="menu_vacuum">Crop data</string>
     <string name="menu_contrib">Contribute</string>
+    <string name="menu_sms">Send SMS with my position</string>
     
     <!-- Communicated -->
     <string name="email_subject">Open GPS Tracker - Track data</string>
